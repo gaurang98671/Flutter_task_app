@@ -9,10 +9,11 @@ class add_tasks extends StatefulWidget {
 }
 
 class _add_tasksState extends State<add_tasks> {
-  // ignore: non_constant_identifier_names
+
   int initial_hour=1;
   int initial_min=1;
   String radio_button_value='AM';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,83 +22,100 @@ class _add_tasksState extends State<add_tasks> {
         title: Text('Add tasks'),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.purpleAccent[100],
+        backgroundColor: Colors.greenAccent,
         onPressed: ()
         {
           Navigator.pop(context);
         },
         child: Icon(Icons.check),
       ),
+
       body: Container(
-        height: 400,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(
+              'images/night.PNG',
+            )
+          )
+        ),
 
-        child: Card(
-          elevation: 5,
-          color: Colors.black54,
-          child: Column(
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Title'
-                ),
+        child: Column(
+          children: <Widget>[
+
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Title'
               ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "Description"
-                ),
+            ),
+
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Description"
               ),
+            ),
 
-             Row(
-               children: <Widget>[
-                 SizedBox(width: 65,),
-                 Column(
-                   children: <Widget>[
-                     NumberPicker.integer(initialValue: initial_hour, minValue: 1, maxValue: 12, onChanged: (val){
-                       setState(() {
-                         initial_hour=val;
-                       });
-                     }),
-                     Text('Hour')
-                   ],
-                 ),
-                 Column(
-                   children: <Widget>[
-                     NumberPicker.integer(initialValue: initial_min, minValue: 1, maxValue: 60, onChanged: (val){
-                       setState(() {
-                         initial_min=val;
-                       },
-                       );
-                     }),
-                     Text('Minutes')
-                   ],
-                 ),
-               ],
-             ),
-              RadioListTile(
+           Row(
+             children: <Widget>[
+               SizedBox(width: 65,),
+               Column(
+                 children: <Widget>[
+                   NumberPicker.integer(initialValue: initial_hour, minValue: 1, maxValue: 12, onChanged: (val){
+                     setState(() {
+                       initial_hour=val;
+                     });
+                   }),
+                   Text('Hour')
+                 ],
+               ),
 
-                groupValue: radio_button_value,
-                title: Text('AM'),
-                value: "AM",
-                onChanged: (val){setState(() {
-                  radio_button_value=val;
+               Column(
+                 children: <Widget>[
+
+                   NumberPicker.integer(
+                       initialValue: initial_min,
+                       minValue: 1,
+                       maxValue: 60,
+                       onChanged: (val){
+                      setState(() {
+                       initial_min=val;
+                     },
+                     );
+                   },
+                   ),
+
+                   Text('Minutes')
+                 ],
+               ),
+             ],
+           ),
+
+            RadioListTile(
+              activeColor: Colors.greenAccent,
+              groupValue: radio_button_value,
+              title: Text('AM'),
+              value: "AM",
+              onChanged: (val){setState(() {
+                radio_button_value=val;
+              }
+              );
+              },
+            ),
+
+            RadioListTile(
+              activeColor: Colors.greenAccent,
+              groupValue: radio_button_value,
+              title: Text('PM'),
+              value: 'PM',
+              onChanged: (val){
+                setState(()
+                {
+                radio_button_value=val;
                 }
-                );
-                },
-              ),
-              RadioListTile(
-                groupValue: radio_button_value,
-                title: Text('PM'),
-                value: 'PM',
-                onChanged: (val){
-                  setState(()
-                  {
-                  radio_button_value=val;
-                  }
-                );
-                },
-              )
-            ],
-          ),
+              );
+              },
+            )
+          ],
         ),
       ),
     );
