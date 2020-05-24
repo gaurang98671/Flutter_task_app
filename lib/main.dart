@@ -11,10 +11,7 @@ class MyApp extends StatelessWidget
   {
     return MaterialApp(
       title: 'Task app',
-      theme: ThemeData(
 
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(title: 'Task app'),
     );
   }

@@ -13,6 +13,8 @@ class _add_tasksState extends State<add_tasks> {
   int initial_hour=1;
   int initial_min=1;
   String radio_button_value='AM';
+  bool checkBoxValue=false;
+  AssetImage img=AssetImage('images/day.PNG');
 
   @override
   Widget build(BuildContext context) {
@@ -34,57 +36,91 @@ class _add_tasksState extends State<add_tasks> {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.fill,
-            image: AssetImage(
-              'images/night.PNG',
-            )
+            image: img
           )
         ),
 
         child: Column(
           children: <Widget>[
-
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Title'
-              ),
+            SizedBox(
+              height: 20,
             ),
 
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Description"
+            Container(
+              width: 350,
+              child: TextField(
+                decoration: InputDecoration(
+
+                  filled: true,
+                  hintText: 'Title',
+                    border: new OutlineInputBorder(
+
+                      borderRadius: new BorderRadius.circular(25.0),
+                      borderSide: new BorderSide(
+                      ),
+                    ),
+
+                  fillColor: Colors.white,
+                ),
+                cursorColor: Colors.white,
+
               ),
             ),
+           SizedBox(height: 40,),
 
            Row(
              children: <Widget>[
                SizedBox(width: 65,),
                Column(
                  children: <Widget>[
-                   NumberPicker.integer(initialValue: initial_hour, minValue: 1, maxValue: 12, onChanged: (val){
-                     setState(() {
-                       initial_hour=val;
-                     });
-                   }),
-                   Text('Hour')
+
+                   Theme(
+                     data: ThemeData(
+                       accentColor: Colors.greenAccent
+                     ),
+                     child: NumberPicker.integer(initialValue: initial_hour, minValue: 1, maxValue: 12, onChanged: (val){
+                       setState(() {
+                         initial_hour=val;
+                       }
+                       );
+                     }
+                     ),
+                   ),
+
+                   Text('Hour',
+                   style: TextStyle(
+                   color: Colors.white
+                   ),
+                   )
                  ],
                ),
 
                Column(
                  children: <Widget>[
 
-                   NumberPicker.integer(
-                       initialValue: initial_min,
-                       minValue: 1,
-                       maxValue: 60,
-                       onChanged: (val){
-                      setState(() {
-                       initial_min=val;
+                   Theme(
+                     data: ThemeData(
+                       accentColor: Colors.greenAccent
+                     ),
+                     child: NumberPicker.integer(
+
+                         initialValue: initial_min,
+                         minValue: 00,
+                         maxValue: 59,
+                         onChanged: (val){
+                        setState(() {
+                         initial_min=val;
+                       },
+                       );
                      },
-                     );
-                   },
+                     ),
                    ),
 
-                   Text('Minutes')
+                   Text('Minutes',
+                   style: TextStyle(
+                   color: Colors.white
+                   ),
+                   )
                  ],
                ),
              ],
@@ -97,6 +133,7 @@ class _add_tasksState extends State<add_tasks> {
               value: "AM",
               onChanged: (val){setState(() {
                 radio_button_value=val;
+                img=AssetImage('images/day.PNG');
               }
               );
               },
@@ -111,9 +148,34 @@ class _add_tasksState extends State<add_tasks> {
                 setState(()
                 {
                 radio_button_value=val;
+                img=AssetImage('images/night.PNG');
                 }
               );
               },
+            ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: 11,
+                  ),
+                  Checkbox(
+                    value: checkBoxValue,
+
+                    activeColor: Colors.greenAccent,
+                    onChanged: (bool val)
+                    {
+                      checkBoxValue=true;
+                    },
+                  ),
+                  Text('Remind me?',
+                  style: TextStyle(
+                  color: Colors.white,
+                    fontSize: 15
+                  ),
+                  )
+                ],
+              ),
             )
           ],
         ),
