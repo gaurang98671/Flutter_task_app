@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget
       title: 'Task app',
       theme: ThemeData(
 
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Task app!!!'),
+      home: MyHomePage(title: 'Task app'),
     );
   }
 }
@@ -37,19 +37,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-
-        title: Text(widget.title),
+        backgroundColor: Colors.black87,
+        title: Center(child: Text(widget.title,)),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Text(
-              'Your tasks'
-            ),
-          ],
+      body: Container(
+        color: Colors.black54,
+        child: Center(
+
+          child: Column(
+            children: <Widget>[
+              Text(
+                'Your tasks'
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.purpleAccent[100],
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>add_tasks()));
         },
