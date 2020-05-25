@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+
 
 class add_tasks extends StatefulWidget {
   @override
@@ -15,6 +19,7 @@ class _add_tasksState extends State<add_tasks> {
   String radio_button_value='AM';
   bool checkBoxValue=false;
   AssetImage img=AssetImage('images/day.PNG');
+  DateTime date_time;
 
   @override
   Widget build(BuildContext context) {
@@ -125,11 +130,34 @@ class _add_tasksState extends State<add_tasks> {
                ),
              ],
            ),
-
+            Row(
+              children: <Widget>[
+                SizedBox(width: 30,
+                ),
+                RaisedButton(
+                    color: Colors.greenAccent,
+                    child: Text('Set date'),
+                    onPressed:(){
+                      DatePicker.showDatePicker(context,
+                          showTitleActions: true,
+                          minTime: DateTime(2019, 1, 5),
+                          maxTime: DateTime(2022, 12, 31), onChanged: (date) {
+                            print('change $date');
+                          }, onConfirm: (date) {
+                            date_time=date;
+                          }, currentTime: DateTime.now(), locale: LocaleType.en
+                      );
+                    }),
+              ],
+            ),
             RadioListTile(
               activeColor: Colors.greenAccent,
               groupValue: radio_button_value,
-              title: Text('AM'),
+              title: Text('AM',
+              style: TextStyle(
+                color: Colors.white
+              ),
+              ),
               value: "AM",
               onChanged: (val){setState(() {
                 radio_button_value=val;
@@ -142,7 +170,11 @@ class _add_tasksState extends State<add_tasks> {
             RadioListTile(
               activeColor: Colors.greenAccent,
               groupValue: radio_button_value,
-              title: Text('PM'),
+              title: Text('PM',
+                style: TextStyle(
+                  color: Colors.white
+                ),
+              ),
               value: 'PM',
               onChanged: (val){
                 setState(()
@@ -153,9 +185,12 @@ class _add_tasksState extends State<add_tasks> {
               );
               },
             ),
+
+
             Container(
               child: Row(
                 children: <Widget>[
+
                   SizedBox(
                     width: 11,
                   ),
@@ -183,3 +218,5 @@ class _add_tasksState extends State<add_tasks> {
     );
   }
 }
+
+
