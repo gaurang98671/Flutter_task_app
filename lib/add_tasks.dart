@@ -196,7 +196,6 @@ class _add_tasksState extends State<add_tasks> {
                   ),
                   Checkbox(
                     value: checkBoxValue,
-
                     activeColor: Colors.greenAccent,
                     onChanged: (bool val)
                     {
